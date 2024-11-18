@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gatewayservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gatewayservice
+  template:
+    metadata:
+      labels:
+        app: gatewayservice
+    spec:
+      containers:
+        - name: gatewayservice
+          image: your-dockerhub-username/gatewayservice
+          ports:
+            - containerPort: 8000
+          env:
+            - name: EUREKA_SERVER_URL
+              value: http://eureka-server:8761/eureka/
